@@ -148,8 +148,8 @@ module.exports = function (grunt) {
         flow: {
           post:  {},
           steps: {
-            js:  [require('./tasks/copy_vendor'), 'concat'],
-            css: [require('./tasks/copy_vendor'), 'concat']
+            js:  ['concat'],
+            css: ['concat']
           }
         }
       },
@@ -167,9 +167,9 @@ module.exports = function (grunt) {
 
     concat: {
       dist: {
-        dest: '<%= yeoman.dist %>/scripts/main.js',
+        dest: '<%= yeoman.dist %>/scripts/api-designer.js',
         src:  [
-          '<%= yeoman.dist %>/scripts/main.js',
+          '<%= yeoman.dist %>/scripts/api-designer.js',
           '.tmp/templates.js'
         ]
       }
@@ -201,6 +201,13 @@ module.exports = function (grunt) {
 
           {
             expand: true,
+            cwd:    'bower_components/api-console/dist/authentication',
+            src:    '*',
+            dest:   '<%= yeoman.dist %>/authentication'
+          },
+
+          {
+            expand: true,
             cwd:    'bower_components/api-console/dist/fonts',
             src:    '*',
             dest:   '<%= yeoman.dist %>/fonts'
@@ -226,7 +233,7 @@ module.exports = function (grunt) {
     ngmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/scripts/main.js': '<%= yeoman.dist %>/scripts/main.js'
+          '<%= yeoman.dist %>/scripts/api-designer.js': '<%= yeoman.dist %>/scripts/api-designer.js'
         }
       }
     },
@@ -234,8 +241,8 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/scripts/main.min.js':   '<%= yeoman.dist %>/scripts/main.js',
-          '<%= yeoman.dist %>/scripts/vendor.min.js': '<%= yeoman.dist %>/scripts/vendor.js'
+          '<%= yeoman.dist %>/scripts/api-designer.min.js':        '<%= yeoman.dist %>/scripts/api-designer.js',
+          '<%= yeoman.dist %>/scripts/api-designer-vendor.min.js': '<%= yeoman.dist %>/scripts/api-designer-vendor.js'
         }
       }
     },
@@ -243,8 +250,8 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/main.min.css':   '<%= yeoman.dist %>/styles/main.css',
-          '<%= yeoman.dist %>/styles/vendor.min.css': '<%= yeoman.dist %>/styles/vendor.css'
+          '<%= yeoman.dist %>/styles/api-designer.min.css':        '<%= yeoman.dist %>/styles/api-designer.css',
+          '<%= yeoman.dist %>/styles/api-designer-vendor.min.css': '<%= yeoman.dist %>/styles/api-designer-vendor.css'
         }
       }
     },
@@ -333,7 +340,6 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat:generated',
     'concat:dist',
-    'copy:generated',
     'copy:dist',
     'ngmin',
     'uglify:dist',
